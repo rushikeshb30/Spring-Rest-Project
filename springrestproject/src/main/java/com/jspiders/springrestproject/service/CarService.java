@@ -16,4 +16,14 @@ public class CarService {
 
 		return carRepository.addCar(car);
 	}
+
+	public Car updateCar(Car car) {
+
+		return carRepository.updateCar(car);
+	}
+
+	public Car deleteCar(int carId) {
+
+		return carRepository.deleteCar(carId);
+	}
 }

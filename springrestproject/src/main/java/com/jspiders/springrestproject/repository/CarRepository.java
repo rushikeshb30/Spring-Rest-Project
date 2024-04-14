@@ -46,4 +46,38 @@ public class CarRepository {
 		return car;
 	}
 
+	public Car updateCar(Car car) {
+
+		openConnection();
+		Car carToBeUpdated = entityManager.find(Car.class, car.getId());
+		if (carToBeUpdated != null) {
+			carToBeUpdated.setName(car.getName());
+			carToBeUpdated.setBrand(car.getBrand());
+			carToBeUpdated.setPrice(car.getPrice());
+			carToBeUpdated.setColor(car.getColor());
+			entityTransaction.begin();
+			entityManager.persist(carToBeUpdated);
+			entityTransaction.commit();
+			closeConnection();
+			return carToBeUpdated;
+		} else {
+			return carToBeUpdated;
+		}
+	}
+
+	public Car deleteCar(int carId) {
+
+		openConnection();
+		Car carToBeDeleted = entityManager.find(Car.class, carId);
+		if (carToBeDeleted != null) {
+			entityTransaction.begin();
+			entityManager.remove(carToBeDeleted);
+			entityTransaction.commit();
+			closeConnection();
+			return carToBeDeleted;
+		} else {
+			return carToBeDeleted;
+		}
+	}
+
 }
