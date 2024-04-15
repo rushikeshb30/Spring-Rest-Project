@@ -14,8 +14,6 @@ import com.jspiders.springrestproject.pojo.Car;
 import com.jspiders.springrestproject.response.Response;
 import com.jspiders.springrestproject.service.CarService;
 
-import lombok.Delegate;
-
 @RestController
 public class CarController {
 
