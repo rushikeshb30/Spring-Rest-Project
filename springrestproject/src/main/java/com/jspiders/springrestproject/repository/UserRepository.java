@@ -40,30 +40,14 @@ public class UserRepository {
 		}
 	}
 
-//	@SuppressWarnings("unchecked")
-//	public User checkUser(User user) {
-//		openConnection();
-//		Query query = entityManager.createQuery("Select user from User user");
-//		List<User> users = query.getResultList();
-//		User userFound = null;
-//		for (User user1 : users) {
-//			if (user1.equals(user)) {
-//				userFound = user1;
-//			}
-//		}
-//		closeConnection();
-//		return userFound;
-//	}
 	@SuppressWarnings("unchecked")
 	public User addUser(User user) {
 		openConnection();
-//		boolean flag = true;
 		User userToBeChecked = user;
 		Query query = entityManager.createQuery("Select user from User user");
 		List<User> users = query.getResultList();
 		for (User user1 : users) {
 			if (user1.getEmail().equals(userToBeChecked.getEmail())) {
-//				flag = false;
 				userToBeChecked = null;
 				break;
 			}
