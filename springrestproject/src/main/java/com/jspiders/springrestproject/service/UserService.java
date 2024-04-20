@@ -40,4 +40,12 @@ public class UserService {
 
 		return userRepository.updateCarsForUser(carId, userId);
 	}
+
+	public User validateUser(long mobile, String password) {
+		try {
+			return userRepository.validateUser(mobile, password);
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
 }

@@ -39,7 +39,7 @@ public class UserController {
 	}
 
 	@PutMapping("/user")
-	public ResponseEntity<Response<User>> updateCar(@RequestBody User user) {
+	public ResponseEntity<Response<User>> updateUser(@RequestBody User user) {
 
 		User updatedUser = userService.updateUser(user);
 		Response<User> response = new Response<User>();
@@ -59,7 +59,7 @@ public class UserController {
 	}
 
 	@DeleteMapping("/user")
-	public ResponseEntity<Response<User>> deleteCar(@RequestParam(name = "userId") int userId) {
+	public ResponseEntity<Response<User>> deleteUser(@RequestParam(name = "userId") int userId) {
 
 		User deletedUser = userService.deleteUser(userId);
 		Response<User> response = new Response<User>();
@@ -76,7 +76,7 @@ public class UserController {
 		}
 	}
 
-	@PostMapping("/userlogin")
+	@PostMapping("/useremail")
 	public ResponseEntity<Response<User>> validateUser(@RequestParam(name = "email") String email,
 			@RequestParam(name = "password") String password) {
 
@@ -85,8 +85,27 @@ public class UserController {
 		if (validatedUser != null) {
 			response.setMessage("Logged in successfully.");
 			response.setData(validatedUser);
-			response.setStatus(HttpStatus.OK.value());
-			return new ResponseEntity<Response<User>>(response, HttpStatus.OK);
+			response.setStatus(HttpStatus.FOUND.value());
+			return new ResponseEntity<Response<User>>(response, HttpStatus.FOUND);
+		} else {
+			response.setMessage("Invalid email or password.");
+			response.setData(validatedUser);
+			response.setStatus(HttpStatus.NOT_FOUND.value());
+			return new ResponseEntity<Response<User>>(response, HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@PostMapping("/usermobile")
+	public ResponseEntity<Response<User>> validateUser(@RequestParam(name = "mobile") long mobile,
+			@RequestParam(name = "password") String password) {
+
+		User validatedUser = userService.validateUser(mobile, password);
+		Response<User> response = new Response<User>();
+		if (validatedUser != null) {
+			response.setMessage("Logged in successfully.");
+			response.setData(validatedUser);
+			response.setStatus(HttpStatus.FOUND.value());
+			return new ResponseEntity<Response<User>>(response, HttpStatus.FOUND);
 		} else {
 			response.setMessage("Invalid email or password.");
 			response.setData(validatedUser);

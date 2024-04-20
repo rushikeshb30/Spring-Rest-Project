@@ -124,4 +124,15 @@ public class UserRepository {
 		}
 	}
 
+	public User validateUser(long mobile, String password) {
+
+		openConnection();
+		Query query = entityManager.createQuery("Select user from User user where mobile = ?1 and password = ?2");
+		query.setParameter(1, mobile);
+		query.setParameter(2, password);
+		User user = (User) query.getSingleResult();
+		closeConnection();
+		return user;
+	}
+
 }
